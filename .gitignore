@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js build output
+.next/
+out/
+build/
+dist/
+
+# Debug & Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Environment files 
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+
+# Prisma Generated Client (якщо генеруєте в кастомну папку src)
+/src/generated/prisma
+
+# Large assets / Media (фото товарів H&M)
+public/images/
+!public/images/.gitkeep
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE / Editors
+.idea/
+*.swp
+*.swo
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Testing / Coverage
+coverage/
+
+# Local Project Structure Documentation
+PROJECT_STRUCTURE.md

@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Sarina&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+/* 1. Глобальне скидання стилів для ВСІХ елементів */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 2. Змінні та налаштування для всього документа */
+:root {
+  /*   
+  --contours-color: #E8B8C7;
+  --dark-accent-color: #D98FA7;
+
+  --button-hover-color: #b3667f;
+
+
+  --light-accent-color: #F9E9EE;
+
+--active-color: #faf2f5;
+
+  --midtone-color: #e4b8c5;
+
+
+  --light-grey: #E8E3E4;
+
+  --background-color: #FFFCFD;
+
+  --font-color: #60434B;
+
+  --light-font-color: #8A7077; */
+
+  --contours-color: #8e686aa0; /* М'який какао-рожевий для контурів */
+  --dark-accent-color: #825e60; /* Насичений теплий акцент (кнопки, плашки) */
+
+  --button-hover-color: #573b3c; /* Глибокий темний відтінок при наведенні */
+
+  --light-accent-color: #f4ecec; /* Дуже світлий пастельно-рожевий підтон */
+
+  --active-color: #ece0e1; /* Ніжний активний стан для елементів списків */
+
+  --midtone-color: #caa1a3; /* Приглушений припаданий какао (середній тон) */
+
+  --light-grey: #d8c4c5; /* Світлий рожево-сірий розділювач */
+
+  --background-color: #faf6f6; /* Теплий молочно-кремовий фон */
+
+  --font-color: #2e191d; /* Глибокий темно-бордовий (майже чорний) для тексту */
+
+  --light-font-color: #694849;
+
+  /* fonts */
+  --logo-font: "Sarina", cursive;
+
+  --headings-font: "Manrope", sans-serif;
+  --regular-text-font: "Manrope", sans-serif;
+
+  /* borders & shadows */
+  --border: 1px solid var(--contours-color);
+  --small-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+  --big-shadow:
+    rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+
+  --content-width: 1200px;
+}
+
+/* globals.css */
+html[data-scroll-behavior="smooth"] {
+  scroll-behavior: smooth;
+}
+
+/* 3. Базові стилі для тіла сторінки */
+body {
+  background-color: var(--background-color);
+  font-family: var(--regular-text-font);
+  color: var(--font-color);
+}
+
+h2 {
+  font-size: 1.75rem;
+  color: var(--font-color);
+  font-weight: 600;
+}
+
+p {
+  color: var(--font-color);
+  font-size: 1rem;
+}
+
+/* --- ЗАГАЛЬНІ СТИЛІ ДЛЯ СЕКЦІЙ --- */
+.content {
+  max-width: var(--content-width);
+  width: 100%;
+  padding: 20px 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px 10px;
+  }
+}
+
+.pageSections {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.875rem, 2.309vw + 1.277rem, 3.125rem);
+  overflow-x: hidden;
+}
+
+.main-headings {
+  margin-bottom: clamp(0.625rem, 0.924vw + 0.386rem, 1.125rem);
+  font-size: clamp(1.125rem, 0.462vw + 1.005rem, 1.375rem);
+}
+
+.controls button {
+  border: none;
+  background: white;
+  cursor: pointer;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  color: var(--font-color);
+  box-shadow: var(--big-shadow);
+  transition: transform 0.2s ease;
+}
+
+@media (hover: hover) {
+  .controls button:hover {
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .new-arrivals {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+#faq {
+  scroll-margin-top: 80px;
+}
+
+#aboutme {
+  scroll-margin-top: 80px;
+}

@@ -1,0 +1,75 @@
+/* --- ОСНОВНИЙ КОНТЕЙНЕР NAV --- */
+.breadcrumbs {
+  color: var(--midtone-color);
+  border-bottom: var(--border);
+  padding: 12px 0;
+  width: 100%;
+}
+
+/* --- СПИСОК OL --- */
+.breadcrumbsContainer {
+  max-width: calc(var(--content-width) - 20px);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 0.938rem; /* 15px */
+  font-weight: 400;
+  list-style: none;
+}
+
+/* --- ОКРЕМІ ЕЛЕМЕНТИ LI --- */
+.breadcrumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap; /* Запобігає переносу тексту одного елемента на новий рядок */
+}
+
+/* --- ПОСИЛАННЯ --- */
+.breadcrumbsContainer a {
+  text-decoration: none;
+  color: var(--midtone-color);
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .breadcrumbsContainer a:hover {
+    color: var(--dark-accent-color);
+  }
+}
+
+.breadcrumbsContainer a:focus-visible {
+  outline: 2px solid var(--dark-accent-color);
+  outline-offset: 2px;
+}
+
+/* --- ПОРУЧНИЙ ТЕКСТ (ПОТОЧНА СТОРІНКА) --- */
+.current {
+  color: var(--dark-accent-color);
+  font-weight: 500;
+}
+
+/* --- МОБІЛЬНА АДАПТИВНІСТЬ --- */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    padding: 10px 0;
+  }
+
+  /* Дозволяє горизонтальний скролл на вузьких екранах, якщо ланцюжок занадто довгий */
+  .breadcrumbsContainer {
+    font-size: 0.875rem; /* 14px */
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; /* Приховує скроллбар у Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  .breadcrumbsContainer::-webkit-scrollbar {
+    display: none; /* Приховує скроллбар у Chrome/Safari */
+  }
+}

@@ -1,0 +1,62 @@
+.accordion {
+  border-bottom: var(--border);
+  width: 100%;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.75rem, 0.462vw + 0.63rem, 1rem) 0;
+  
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+
+    transition: color 0.2s ease;
+}
+
+.title {
+  font-size: clamp(0.938rem, 0.346vw + 0.848rem, 1.125rem);
+  font-weight: 500;
+}
+
+@media (hover: hover) {
+  .trigger:hover {
+    color: var(--dark-accent-color);
+  }
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevronOpen {
+  transform: rotate(90deg);
+}
+
+
+.contentWrapper {
+  display: grid;
+  grid-template-rows: 0fr; /* Початковий стан: висота 0 */
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contentOpen {
+  grid-template-rows: 1fr; /* Відкритий стан: займає 100% контенту */
+}
+
+/* Внутрішній блок обов'язковий, щоб приховати контент у закритому стані */
+.contentInner {
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.contentInner > * {
+  padding-bottom: 16px;
+  font-size: clamp(0.813rem, 0.231vw + 0.753rem, 0.938rem);
+}
+

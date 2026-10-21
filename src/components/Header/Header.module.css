@@ -1,0 +1,321 @@
+/* --- ОСНОВНА СТРУКТУРА ХЕДЕРА --- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: white;
+  width: 100%;
+  /*   box-shadow: var(--small-shadow); */
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: var(--small-shadow);
+}
+
+.navContainer {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 10px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--dark-accent-color, #db2777);
+  text-decoration: none;
+  font-family: var(--logo-font, sans-serif);
+}
+
+.navigationIcons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navigationButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px; /* Замість aspect-ratio краще явно вказати width для надійності */
+  padding: 0;
+  
+  transition:
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navigationIcons svg {
+  stroke: var(--font-color);
+  transition: stroke 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Стан при наведенні (Hover) */
+@media (hover: hover) {
+  .navigationButton:hover svg {
+    stroke: var(--dark-accent-color);
+  }
+}
+
+.navigationButton:active {
+  background-color: var(--midtone-color);
+  color: #ffffff;
+
+  transition-duration: 0.05s;
+}
+
+.navigationButton:active svg {
+  stroke: #ffffff;
+  transition-duration: 0.05s;
+}
+
+/* --- ДЕСКТОПНИЙ ДРОПДАУН --- */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropBtn {
+  height: clamp(60px, 8vw, 70px);
+  background-color: transparent;
+  color: var(--font-color);
+  padding: 0 clamp(8px, 1.5vw, 12px);
+  font-size: 1rem;
+  font-family: var(--regular-text-font);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  height: clamp(60px, 8vw, 70px);
+  color: var(--font-color);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0 clamp(8px, 1.5vw, 12px);
+  transition: color 0.2s ease;
+}
+
+.dropdownOpen .dropBtn {
+  color: var(--dark-accent-color);
+}
+
+@media (hover: hover) {
+  .dropBtn:hover,
+  .navLink:hover {
+    color: var(--dark-accent-color);
+  }
+}
+
+.iconArrow,
+.regularArrows {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.dropdownOpen .iconArrow {
+  transform: rotate(180deg);
+}
+
+/* Повноширинне меню каталогу */
+.dropdownContent {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  display: grid;
+  width: 100vw;
+  height: 50vh;
+  max-height: calc(100vh - 70px);
+  background-color: white;
+  box-shadow: var(--big-shadow);
+  z-index: 100;
+  border: 1px solid var(--light-grey, #f1f3f5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
+}
+
+.dropdownOpen .dropdownContent {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.categoryColumn {
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  margin: 0;
+  padding: 16px 0;
+  border-right: 1px solid var(--light-grey, #f1f3f5);
+  list-style: none;
+}
+
+.categoryColumn:last-child {
+  border-right: 0;
+}
+
+.categoryBranch + .categoryBranch {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--light-grey, #f1f3f5);
+}
+
+.categoryBranch > a {
+  font-weight: 700;
+  color: var(--dark-accent-color);
+}
+
+.categoryBranch ul {
+  margin: 0;
+  padding: 4px 0 0;
+  list-style: none;
+}
+
+.categoryBranch ul a {
+  padding-left: 36px;
+  font-size: 0.92rem;
+}
+
+.categoryColumn a {
+  color: var(--font-color);
+  padding: 12px 24px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.categoryColumn .activeLi > a,
+.activeLi > a {
+  background-color: var(--light-accent-color, #fff5f6);
+  color: var(--dark-accent-color);
+}
+
+@media (hover: hover) {
+  .categoryColumn a:hover {
+    background-color: var(--light-accent-color, #fff5f6);
+    color: var(--dark-accent-color);
+  }
+}
+
+.activeLi > a .regularArrows {
+  stroke: var(--dark-accent-color);
+}
+
+.columnHeading a {
+  font-weight: 700;
+  color: var(--dark-accent-color);
+}
+
+.menuBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: none; /* Ховаємо на десктопі */
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.cartIcon {
+  position: relative;
+}
+
+.cartCount {
+  background-color: var(--dark-accent-color);
+  color: white;
+
+  position: absolute;
+  top: 6px;
+  left: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 4px;
+
+  border-radius: 6px;
+
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.mobileMenuIcon {
+  color: var(--font-color);
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    height: 60px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ВИПРАВЛЕННЯ: Прибираємо justify-content: center, робимо блоки однаковими */
+  .leftSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Вирівнюємо по лівому краю */
+    gap: 0;
+    min-width: 80px; /* Задаємо однакову ширину з правою секцією для ідеального центрування логотипу */
+  }
+
+  .navigationIcons {
+    min-width: 80px;
+    justify-content: flex-end;
+  }
+
+  .menuBtn {
+    display: flex; /* Показуємо як flex для центрування SVG */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dropdown,
+  .navLink,
+  .navigationIcons .likeIcon,
+  .navigationIcons .userIcon {
+    display: none;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}

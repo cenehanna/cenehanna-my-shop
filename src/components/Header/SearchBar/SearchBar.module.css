@@ -1,0 +1,219 @@
+/* 1. Обгортка зі сірим затемненням екрана */
+.searchWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  padding-top: 70px;
+
+  z-index: 49;
+
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease-out,
+    visibility 0.25s step-end;
+
+  will-change: opacity;
+}
+
+/* 2. Стан відкритого пошуку */
+.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition:
+    opacity 0.25s ease-out,
+    visibility 0s;
+}
+
+/* 3. Плашка пошуку на ПК */
+.searchHeader {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background-color: var(--background-color);
+  padding: 20px 25vw;
+  box-shadow: var(--big-shadow);
+
+  transform: translateY(-10px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.open .searchHeader {
+  transform: translateY(0);
+}
+
+/* 4. Кнопка "Назад" — прихована на ПК */
+.backButton {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--font-color);
+  cursor: pointer;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.backButton:hover {
+  color: var(--dark-accent-color);
+  background-color: var(--light-accent-color);
+}
+
+/* 5. Поле пошуку (Фіксована висота на ПК: 48px) */
+.searchBar {
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.searchBar:focus-within {
+  border-color: var(--dark-accent-color);
+  background-color: var(--background-color);
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--light-font-color);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--regular-text-font);
+  font-size: 1.05rem;
+  color: var(--font-color);
+}
+
+.searchInput::placeholder {
+  color: var(--light-font-color);
+}
+
+/* 6. Кнопка очищення */
+.clearButton {
+  background: transparent;
+  border: none;
+  color: var(--light-font-color);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.clearButton:hover {
+  color: var(--dark-accent-color);
+  background-color: var(--active-color);
+}
+
+/* 7. Кнопка "Знайти" (Фіксована висота на ПК: 48px) */
+.submitButton {
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-accent-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0 24px;
+  font-family: var(--regular-text-font);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.submitButton:hover {
+  background-color: var(--button-hover-color);
+}
+
+.submitButton:active {
+  transform: scale(0.98);
+}
+
+/* 8. Адаптив для мобільних пристроїв */
+@media (max-width: 768px) {
+  .searchWrapper {
+    z-index: 52;
+    padding: 12px 10px;
+  }
+
+  .backButton {
+    display: flex;
+  }
+
+  /* Об'єднуємо блок пошуку та кнопку */
+  .searchHeader {
+    padding: 8px 10px;
+    border-radius: 14px;
+    gap: 0; /* Прибираємо проміжок між інпутом та кнопкою */
+    box-shadow: var(--small-shadow);
+    transform: scale(0.97);
+  }
+
+  /* Фіксована висота для мобільних: 42px + стикування зліва */
+  .searchBar {
+    height: 42px;
+    padding: 0 10px;
+    border-radius: 10px 0 0 10px; /* Закруглення тільки зліва */
+  }
+
+  .searchInput {
+    font-size: 0.95rem;
+  }
+
+  /* Фіксована висота для мобільних: 42px + стикування справа */
+  .submitButton {
+    height: 42px;
+    padding: 0 14px;
+    font-size: 0.85rem;
+    border-radius: 0 10px 10px 0; /* Закруглення тільки справа */
+  }
+
+  .open .searchHeader {
+    transform: scale(1);
+  }
+}

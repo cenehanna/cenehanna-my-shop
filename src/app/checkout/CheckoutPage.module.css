@@ -1,0 +1,507 @@
+.checkoutContainer {
+  max-width: var(--content-width, 1200px);
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 16px;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+}
+
+.layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: var(--headings-font);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--font-color);
+  margin: 0 0 24px 0;
+}
+
+/* Список товарів */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemCard {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--light-grey);
+  align-items: flex-start;
+}
+
+.itemCard:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.itemImage {
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.itemDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemName {
+  font-family: var(--headings-font);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--font-color);
+  margin: 0;
+}
+
+.itemMeta {
+  font-size: 14px;
+  color: var(--light-font-color);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.itemMeta span {
+  color: var(--font-color);
+  font-weight: 500;
+}
+
+.itemPriceBlock {
+  text-align: right;
+  min-width: 100px;
+}
+
+.priceLabel {
+  font-size: 13px;
+  color: var(--light-font-color);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.priceValue {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--font-color);
+}
+
+/* Секція Доставка */
+.deliverySection {
+  margin-top: 40px;
+}
+
+.sectionTitle {
+  font-family: var(--headings-font);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--font-color);
+  margin: 0 0 20px 0;
+}
+
+.carrierOptions {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--font-color);
+  cursor: pointer;
+}
+
+.radioInput {
+  accent-color: var(--dark-accent-color);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--font-color);
+}
+
+.selectButton {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--contours-color);
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: var(--dark-accent-color);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  font-family: var(--regular-text-font);
+}
+
+.selectButton:hover {
+  border-color: var(--dark-accent-color);
+}
+
+.selectButton .chevron {
+  color: var(--dark-accent-color);
+  font-size: 14px;
+}
+
+/* Блок Саммарі "Разом" */
+.summaryCard {
+  position: sticky;
+  top: 85px;
+  align-self: flex-start;
+  width: 360px;
+  background-color: #ffffff;
+  border: 1px solid var(--contours-color);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--small-shadow);
+  box-sizing: border-box;
+}
+
+.summaryTitle {
+  font-family: var(--headings-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--font-color);
+  margin: 0 0 24px 0;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--font-color);
+}
+
+.summaryDivider {
+  height: 1px;
+  background-color: var(--light-grey);
+  margin: 16px 0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--font-color);
+}
+
+/* Кнопка має базовий компонентний стиль, а тут лише доповнюємо розмірами */
+.submitButton {
+  width: 100%;
+  height: 48px;
+  font-size: 15px;
+  font-family: var(--regular-text-font);
+}
+
+/* Адаптивність */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .summaryCard {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .itemCard {
+    gap: 12px;
+  }
+
+  .itemImage {
+    width: 90px;
+    height: 120px;
+  }
+
+  .itemName {
+    font-size: 16px;
+  }
+}
+
+/* Додаткові стилі для інпутів та сітки контактних даних */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.textInput {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--contours-color);
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: var(--font-color);
+  font-size: 14px;
+  font-family: var(--regular-text-font);
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.textInput::placeholder {
+  color: var(--light-font-color);
+  opacity: 0.6;
+}
+
+.textInput:focus {
+  border-color: var(--dark-accent-color);
+}
+
+.section {
+  margin-top: 40px;
+}
+
+/* Адаптивність для сітки інпутів на мобільних */
+@media (max-width: 576px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ... всі попередні стилі залишаються ... */
+
+/* Стилі для повідомлень про помилки */
+.inputError {
+  border-color: #d9534f !important;
+}
+
+.inputError:focus {
+  border-color: #d9534f !important;
+}
+
+.errorText {
+  font-size: 12px;
+  color: #d9534f;
+  margin-top: 2px;
+  font-family: var(--regular-text-font);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.3);
+}
+
+.submitButton:disabled:hover {
+  background-color: var(--dark-accent-color);
+  border-color: var(--dark-accent-color);
+}
+
+/* --- Dropdown (Нова Пошта) --- */
+.dropdownContainer {
+  position: relative;
+  width: 100%;
+}
+
+.searchInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIconLeft {
+  position: absolute;
+  left: 14px;
+  color: var(--light-font-color);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.textInputWithIcon {
+  padding-left: 42px;
+  padding-right: 42px;
+}
+
+.clearButton {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--light-accent-color);
+  color: var(--dark-accent-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clearButton:hover {
+  background-color: var(--active-color);
+}
+
+.loadingSpinner {
+  position: absolute;
+  right: 14px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--light-grey);
+  border-top-color: var(--dark-accent-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dropdownList {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 1px solid var(--contours-color);
+  border-radius: 10px;
+  box-shadow: var(--big-shadow);
+  list-style: none;
+  padding: 6px;
+  margin: 0;
+  z-index: 50;
+}
+
+.dropdownItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--font-color);
+  transition: background-color 0.15s ease;
+  font-family: var(--regular-text-font);
+}
+
+.dropdownItem:hover {
+  background-color: var(--light-accent-color);
+}
+
+.dropdownItemMain {
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.dropdownItemSub {
+  font-size: 12px;
+  color: var(--light-font-color);
+}
+
+.dropdownEmpty {
+  padding: 12px;
+  font-size: 13px;
+  color: var(--light-font-color);
+  text-align: center;
+}
+
+.highlight {
+  background-color: var(--active-color);
+  color: var(--font-color);
+  padding: 0;
+  margin: 0;
+  border-radius: 3px;
+  /* Щоб підсвічування не розривало слово */
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Скролбар для dropdown */
+.dropdownList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdownList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdownList::-webkit-scrollbar-thumb {
+  background-color: var(--light-grey);
+  border-radius: 4px;
+}
+
+.dropdownList::-webkit-scrollbar-thumb:hover {
+  background-color: var(--midtone-color);
+}
+
+.emptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--light-font-color);
+}
+
+.emptyCart p {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--font-color);
+  margin: 0;
+}
+
+.emptyCartLink {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--dark-accent-color);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.emptyCartLink:hover {
+  color: var(--button-hover-color);
+}

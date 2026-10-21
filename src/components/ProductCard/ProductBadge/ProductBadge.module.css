@@ -1,0 +1,44 @@
+.productNote {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  box-shadow: var(--big-shadow);
+  padding: 5px 15px;
+/* padding: 0 clamp(12px, 1.5vw, 18px);
+ */height: clamp(1.688rem, 1.25vw + 1.4rem, 2.25rem); 
+ font-size: clamp(0.9rem, 0.85rem + 0.15vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.emptyBadge {
+  display: inline-block;
+  width: 1px;
+  visibility: hidden;
+}
+
+.pinkNote {
+  background-color: #fee1ea;
+  color: #e96d94;
+}
+
+.yellowNote {
+  background-color: #feefc0;
+  color: #d56b00;
+}
+
+.violetNote {
+  background-color: #f8ebfe;
+  color: #8154ab;
+}
+
+.greenNote {
+  background-color: #e2e9d7;
+  color: #2d8425;
+}
+
+.blueNote {
+  background-color: #e1f5fe;
+  color: #0288d1;
+}

@@ -1,0 +1,129 @@
+.content {
+  max-width: var(--content-width);
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Шапка сторінки */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 15px 0;
+  border-bottom: var(--border);
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.clearButton {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Сітка товарів аналогічна до .newArrivals */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px 20px;
+}
+
+/* Порожній стан */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 10px;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.emptyText {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 25px 0;
+  opacity: 0.8;
+}
+
+@media (hover: hover) {
+  .shopButton:hover {
+    opacity: 0.8;
+  }
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch; /* Розтягуємо всі дочірні елементи на всю ширину flex-контейнера */
+    gap: 15px;
+  }
+
+  .clearButton {
+    /* Прибрано align-self: flex-start */
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .clearButton {
+    width: 100%;
+  }
+}
+
+.catalogButton {
+  gap: 8px;
+}
+
+.arrowIcon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  position: relative;
+  top: 1px;
+}
+
+@media (hover: hover) {
+  .catalogButton:hover .arrowIcon {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 576px) {
+  .catalogButton {
+    width: 100%;
+  }
+}

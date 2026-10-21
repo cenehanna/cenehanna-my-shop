@@ -1,0 +1,190 @@
+.heroBanner {
+  display: flex;
+  padding: 0 10px;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  background:
+    /* accent-colour fade on the left edge, to the centre */
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--dark-accent-color) 90%, transparent) 0%,
+      color-mix(in srgb, var(--dark-accent-color) 50%, transparent) 35%,
+      transparent 70%
+    ),
+    /* original dark overlay */
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
+    url("/josef-maxson-uzLFzX8SRx4-unsplash.jpg") top right / 120% auto no-repeat;
+}
+
+/* Content container */
+.inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 40px);
+  width: 100%;
+  max-width: var(--content-width, 1200px);
+  height: 100%;
+  padding: 0 clamp(16px, 4vw, 32px) 0 0; /* no left padding: cards touch the container's left edge */
+}
+
+/* ---------- Product cards ---------- */
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: clamp(8px, 1.2vw, 14px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto; /* cards never stretch or shrink */
+  width: clamp(110px, 14vw, 170px);
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.cardImage {
+  width: 100%;
+  aspect-ratio: 4 / 4.2;
+  background: #e6e0da;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px 10px;
+}
+
+.cardName {
+  margin: 0;
+  color: #3b2a1e;
+  font-size: clamp(0.75rem, 0.9vw, 0.9rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.cardPrice {
+  margin: 0;
+  color: #8a5a36;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-weight: 700;
+}
+
+/* ---------- Right-hand text ---------- */
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  max-width: 440px;
+  margin-left: auto;
+  text-align: center;
+}
+
+.heroTitle {
+  color: white;
+  font-family: "Amatic SC", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 1.386vw + 1.6rem, 3.125rem);
+  line-height: 1.1;
+  -webkit-text-stroke: 1px white;
+  margin: 0 0 clamp(6px, 1vw, 10px);
+}
+
+.heroSubtitle {
+  color: white;
+  font-size: clamp(0.875rem, 0.462vw + 0.755rem, 1.125rem);
+  margin: 0 0 clamp(16px, 2vw, 25px);
+  font-weight: 400;
+  text-align: center;
+  padding: 0 clamp(10px, 2vw, 20px);
+}
+
+.heroBtn {
+  box-shadow: var(--big-shadow);
+  padding: clamp(10px, 1.5vw, 16px) clamp(18px, 2vw, 28px);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border: none;
+}
+
+/* ---------- Tablet: cards on top, text below ---------- */
+
+@media (max-width: 1024px) {
+  .heroBanner {
+    height: auto;
+    min-height: 270px;
+    /* photo must cover the taller banner */
+    background-size: auto, auto, cover;
+    background-position: 0 0, 0 0, center left;
+  }
+
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 24px;
+    height: auto;
+    padding: 24px 0 28px;
+  }
+
+  .cards {
+    align-self: flex-start;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    width: clamp(130px, 22vw, 170px);
+  }
+
+  .heroContent {
+    flex: 0 0 auto;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
+
+/* ---------- Mobile: fixed-size cards, horizontal scroll ---------- */
+
+@media (max-width: 600px) {
+  .inner {
+    gap: 20px;
+    padding: 20px 0 24px;
+  }
+
+  .cards {
+    width: 100%;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card {
+    width: 130px;
+    scroll-snap-align: start;
+  }
+
+  .heroContent {
+    max-width: none;
+    margin: 0;
+  }
+}

@@ -1,0 +1,145 @@
+.quickCategories {
+  max-width: var(--content-width);
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.quickCategories .headings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(0.125rem, 0.924vw + -0.114rem, 0.625rem);
+}
+
+.headings h2 {
+  margin-bottom: 0;
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--dark-accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .viewAllLink:hover {
+    opacity: 0.85;
+  }
+}
+
+.arrowIcon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  position: relative;
+  top: 1px;
+}
+
+@media (hover: hover) {
+  .viewAllLink:hover .arrowIcon {
+    transform: translateX(4px);
+  }
+}
+
+.categoriesCards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  padding-top: 8px;
+}
+
+.card {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border: var(--border);
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  text-decoration: none;
+  gap: clamp(8px, 2vw, 12px);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Активний стан (клик на кнопку) */
+.card:active {
+  background-color: var(--active-color);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--dark-accent-color);
+  }
+}
+
+.card h3 {
+  min-width: 0;
+  color: var(--dark-accent-color);
+  font-size: clamp(0.75rem, 0.462vw + 0.63rem, 1rem);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Контейнер фото: квадрат, зменшується на малих екранах */
+.photoWrap {
+  --photo-size: clamp(32px, 4vw, 48px);
+  width: var(--photo-size);
+  height: var(--photo-size);
+  flex-shrink: 0;
+}
+
+.cardPhoto {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 768px) {
+  .categoriesCards {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    touch-action: pan-x pinch-zoom;
+    scrollbar-width: none;
+  }
+
+  .categoriesCards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .headings {
+    margin-bottom: 15px;
+  }
+
+  .headings span {
+    font-size: 0.9rem;
+  }
+
+  .card {
+    flex: 0 0 45%;
+    padding: 14px 20px;
+    border-radius: 6px;
+  }
+}

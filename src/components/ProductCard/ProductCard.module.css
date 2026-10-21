@@ -1,0 +1,209 @@
+.productCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+/* --- КОНТЕЙНЕР ДЛЯ ЗОБРАЖЕНЬ --- */
+.productImg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Стандартна пропорція для фейшн-картки */
+  overflow: hidden;
+  border-radius: 10px;
+
+  background-color: #f1ecec;
+}
+
+/* Спільні стилі для обох картинок */
+.primaryImg,
+.secondaryImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+  transition:
+    opacity 0.4s ease,
+    filter 0.3s ease;
+}
+
+/* Перша картинка (завжди знизу) */
+.primaryImg {
+  z-index: 1;
+}
+
+/* Друга картинка (зверху, за замовчуванням прозора) */
+.secondaryImg {
+  z-index: 2;
+  opacity: 0;
+}
+
+/* Клас активності для другої картинки */
+.secondaryImg.active {
+  opacity: 1;
+}
+
+/* Злегка затемнюємо лише картинку при наведенні (за бажанням) */
+@media (hover: hover) {
+  .productCard:hover .primaryImg,
+  .productCard:hover .secondaryImg {
+    filter: brightness(0.95);
+  }
+}
+
+/* --- КНОПКИ ТА БЕЙДЖІ ПОВЕРХ КАРТИНКИ --- */
+.cardButtons {
+  padding: clamp(10px, 2vw, 16px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3; /* Вище за обидві картинки */
+  pointer-events: none; /* Щоб ховер працював і через прогалини між кнопками */
+}
+
+/* Повертаємо клікабельність для елементів верхньої панелі */
+.cardButtons > * {
+  pointer-events: auto;
+}
+
+/* --- ТЕКСТОВА ІНФОРМАЦІЯ --- */
+.productInfo {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Назва товару */
+.productInfo h5 {
+  font-size: clamp(1rem, 0.95rem + 0.15vw, 1.15rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--font-color);
+  margin: 0 0 3px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Опис */
+.productInfo p {
+  font-size: clamp(0.82rem, 0.8rem + 0.1vw, 0.95rem);
+  font-weight: 400;
+  color: var(--light-font-color);
+  line-height: 1.4;
+  margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ціна */
+.productInfo h4 {
+  font-size: clamp(1.15rem, 1.1rem + 0.15vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--dark-accent-color);
+  margin: 5px 0 0;
+}
+
+.variantSwatches {
+  display: flex;
+  gap: 7px;
+  margin-top: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px;
+}
+
+.variantSwatches::-webkit-scrollbar {
+  display: none;
+}
+
+.variantSwatch {
+  position: relative;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: #f3f3f3;
+  cursor: pointer;
+}
+
+.variantSwatch img {
+  object-fit: cover;
+}
+
+.selectedSwatch {
+  outline: 2px solid var(--dark-accent-color);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .cardButtons {
+    padding: 10px;
+  }
+
+  .productImg {
+    border-radius: 6px;
+  }
+
+  .primaryImg,
+  .secondaryImg {
+    border-radius: 6px;
+  }
+
+  .variantSwatch{
+      flex: 0 0 22px;
+
+    width: 22px;
+    height: 22px
+  }
+}
+
+@media (max-width: 600px) {
+  .productInfo {
+    margin-top: 9px;
+    gap: 3px;
+  }
+
+  /* Назва товару */
+  .productInfo h5 {
+    font-size: 0.9rem;
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+
+  /* Опис */
+  .productInfo p {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  /* Ціна */
+  .productInfo h4 {
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-top: 4px;
+  }
+}

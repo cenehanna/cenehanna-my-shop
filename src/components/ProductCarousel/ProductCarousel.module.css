@@ -1,0 +1,133 @@
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: calc(clamp(0.125rem, 0.924vw + -0.114rem, 0.625rem) + 8px);
+}
+
+.headerRow h2 {
+  margin-bottom: 0;
+}
+
+.seeAllButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: var(--dark-accent-color, #1f1f1f);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.seeAllButton:hover {
+  opacity: 0.7;
+}
+
+.arrowIcon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  position: relative;
+  top: 1px;
+}
+
+.seeAllButton:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+.ProductCarousel {
+  position: relative;
+  width: 100%;
+  max-width: calc(var(--content-width) - 40px);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.arrowBtn:disabled {
+  opacity: 0;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Позиціонування зліва та справа */
+.prevBtn {
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+.nextBtn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+/* Обгортка в'юпорту */
+.carouselTrack {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Контейнер для слайдів */
+.carousel {
+  display: flex;
+  gap: 20px;
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Окремий слайд (4.5 карток у видимому вікні) */
+.carouselSlide {
+  flex: 0 0 calc((100% - 3 * 20px) / 4);
+  min-width: 0;
+  user-select: none;
+}
+
+.progressBar {
+  height: 3px;
+  background-color: #f1f3f5;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.progressFill {
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark-accent-color);
+  transition: transform 0.1s ease-out;
+}
+
+@media (max-width: 768px) {
+  .ProductCarousel {
+    padding: 0;
+  }
+
+  .arrowBtn {
+    display: none;
+  }
+
+  .carousel {
+    gap: 12px;
+  }
+
+  .carouselSlide {
+    flex: 0 0 calc((100% - 12px) / 2);
+    min-width: 0;
+  }
+}

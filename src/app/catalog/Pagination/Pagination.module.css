@@ -1,0 +1,115 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+}
+
+
+.pageLink,
+.ellipsis {
+  min-width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--contours-color);
+  background: #fff;
+  color: var(--dark-accent-color);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ellipsis {
+  border: none;
+  background: transparent;
+  min-width: 20px;
+  padding: 0;
+  color: var(--light-font-color);
+}
+
+
+
+.pageLink:hover:not(.active):not(.disabled) {
+  border-color: var(--dark-accent-color);
+  color: var(--dark-accent-color);
+}
+
+
+.active {
+  background: var(--dark-accent-color);
+  border-color: var(--dark-accent-color);
+  color: #fff;
+}
+
+.navButton {
+  min-width: 80px;
+  font-weight: 500;
+}
+
+.pageLink:active {
+  background: var(--midtone-color);
+  border-color: var(--midtone-color) !important;
+  color: #fff !important;
+}
+.navButton:active {
+  background: var(--midtone-color);
+  border-color: var(--midtone-color) !important;
+  color: #fff !important;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.45;
+  cursor: default;
+}
+
+
+/* За замовчуванням (десктоп) шеврон прихований або показується поруч із текстом */
+.chevron {
+  font-size: 18px;
+  line-height: 1;
+  display: none; /* За бажанням можна показати і на десктопі поруч із текстом */
+}
+
+.buttonText {
+  display: inline;
+}
+
+
+@media (max-width: 640px) {
+
+
+  .pageLink,
+  .ellipsis {
+    min-width: 32px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+
+
+
+    .buttonText {
+    display: none; /* Приховуємо текст "Назад" / "Далі" */
+  }
+
+  .chevron {
+    display: inline-block; /* Показуємо тільки шеврон */
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .navButton {
+    padding: 8px 12px; /* Компактніші відступи для мобільних */
+      min-width: 32px;
+
+  }
+
+}
+

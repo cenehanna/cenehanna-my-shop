@@ -1,0 +1,231 @@
+.productContainer {
+  max-width: calc(var(--content-width) - 20px);
+  width: 100%;
+  padding: 0 10px;
+  margin: 50px auto 0;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.imagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 60%;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonContainer > button:first-child {
+  padding-right: 36px;
+  padding-left: 36px;
+}
+
+.infoContainer {
+  width: 40%;
+  position: sticky;
+  top: 80px; /* без цього не працює sticky*/
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start; /* без цього не працює sticky*/
+}
+
+.favorite {
+  flex-shrink:0;
+  padding: 14px;
+  transition: transform 0.1s ease-in-out;
+}
+
+.favorite:active {
+  transform: translateY(0);
+  transform: scale(0.94);
+}
+
+.askMeLink {
+  text-decoration: none;
+  color: var(--dark-accent-color);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color 0.1s ease-in-out;
+  margin-top: 15px;
+}
+
+@media (hover: hover) {
+  .askMeLink:hover {
+    color: var(--midtone-color);
+  }
+  .favorite:hover {
+    background-color: var(--dark-accent-color);
+    border: 1px solid var(--dark-accent-color);
+  }
+}
+
+.title {
+  font-size: clamp(1.5rem, 0.462vw + 1.38rem, 1.75rem);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.productCharacteristics {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.productCharacteristics > div {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.7fr) 1fr;
+  gap: 12px;
+}
+
+.productCharacteristics dt {
+  color: var(--light-font-color);
+}
+
+.productCharacteristics dd {
+  margin: 0;
+}
+
+.accordions {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoContainer .price {
+  color: var(--dark-accent-color);
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  margin: 20px 0;
+}
+
+.badgesContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.badgesContainer span {
+  box-shadow: none;
+}
+
+/* Третя кнопка зберігає свій розмір і не розтягується */
+.favorite {
+  flex-shrink: 0; /* Не дозволяє кнопці стискатися, якщо місця мало */
+  padding: 12px;
+}
+
+
+
+.askMeLink:active {
+  text-decoration: underline;
+}
+.images {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 15% 1fr;
+  gap: 15px;
+  align-items: stretch;
+}
+
+@media screen and (max-width: 992px) {
+  .badgesContainer {
+    margin-bottom: 10px;
+  }
+
+  .productContainer {
+    flex-direction: column;
+    margin: 10px auto 0;
+  }
+
+  .imagesContainer {
+    display: contents;
+  }
+
+  /* Повертаємо display: contents, щоб order працював на .accordions */
+  .images {
+    display: contents;
+  }
+
+  .infoContainer {
+    order: 2;
+    width: 100%;
+    position: static;
+    margin: 25px 0;
+    padding: 0 50px;
+  }
+
+  .accordions {
+    order: 3;
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* 1. Кнопка "Купити" займає 100% першого рядка */
+  .buttonContainer > button:first-child {
+    flex: 1 1 100%;
+  }
+
+  .infoContainer {
+    padding: 0;
+  }
+
+  .accordions {
+    padding: 0;
+  }
+
+  .infoContainer {
+    margin: 15px 0;
+  }
+}
+
+.CheckIcon {
+  margin-left: 6px;
+}
+
+.detailVariants {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
+  font-size: 0.95rem;
+}
+
+.detailSwatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detailSwatch {
+  width: 42px;
+  height: 52px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #f4f4f4;
+  cursor: pointer;
+}
+
+.detailSwatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.activeDetailSwatch {
+  outline: 2px solid var(--dark-accent-color);
+  outline-offset: 2px;
+}

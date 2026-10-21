@@ -1,0 +1,49 @@
+.favoriteButton {
+  padding: 5px;
+
+  /* Вирівнювання іконки чітко по центру */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  color: var(--font-color);
+  box-shadow: var(--big-shadow);
+
+  /* Плавність та розгладження анімації */
+  transition:
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s ease,
+    color 0.2s ease;
+  transform-origin: center;
+
+  /* Оптимізація рендерингу (без постійного створення шару GPU для каталогу) */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Увімкнення GPU-шару лише під час взаємодії */
+.favoriteButton:active {
+  transform: scale(0.94);
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  .favoriteButton:hover {
+    background-color: var(--dark-accent-color);
+    color: white;
+    will-change: transform;
+  }
+}
+
+.icon {
+  width: clamp(1.125rem, 0.832vw + 0.91rem, 1.575rem);
+  height: clamp(1.125rem, 0.832vw + 0.91rem, 1.575rem);
+  
+  /* Фіксація векторних ліній */
+  display: block;
+  flex-shrink: 0;
+  pointer-events: none;
+}

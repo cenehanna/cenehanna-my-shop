@@ -1,0 +1,131 @@
+.productsContainer {
+  flex: 1;
+  min-width: 0;
+  padding-top: 25px;
+}
+
+.gridHeading {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 20px;
+  
+}
+
+.gridHeading h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  
+}
+
+.productsCount {
+  font-size: 1.2rem;
+  color: var(--light-font-color);
+  font-weight: 500;
+}
+
+.toolbar {
+  display: flex;
+  justify-content:end;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  background-color: var(--background-color);
+
+}
+
+.filterTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterTag {
+  background-color: white;
+  color: var(--dark-accent-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--dark-accent-color);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .filterTag:hover {
+    background-color: var(--dark-accent-color);
+    color: white;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px 20px;
+    z-index: 50;
+
+}
+
+.filterButtonContainer {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px 10px;
+  }
+
+  .filterTags {
+    display: none;
+  }
+
+  .filterButtonContainer {
+    display: block;
+  }
+
+  .toolbar {
+  position: sticky;
+  top: 60px; /* без цього не працює sticky*/
+    align-self: flex-start; /* без цього не працює sticky*/
+
+  z-index: 51;
+
+    flex-direction: row-reverse;
+  }
+
+  .toolbar {
+ margin: 0 -10px;
+padding: 12px 10px;
+  margin-bottom: 12px;
+}
+
+.gridHeading{
+  margin-bottom: 6px;
+}
+
+.gridHeading h1 {
+  font-size: 1.35rem;
+}
+
+.productsCount {
+  font-size: 1rem;
+}
+
+  .productsContainer{
+    padding-top: 18px;
+  }
+
+.toolbar {
+  border-bottom: var(--border);
+box-shadow: 0 3px 6px rgba(46, 25, 29, 0.08);
+margin-bottom: 16px;
+}
+
+}
+
