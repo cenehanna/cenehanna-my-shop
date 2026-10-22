@@ -74,12 +74,16 @@ export default function CheckoutPage() {
                   />
                   <div className={styles.itemDetails}>
                     <h3 className={styles.itemName}>{item.name}</h3>
-                    <p className={styles.itemMeta}>
-                      Size: <span>{item.size}</span>
-                    </p>
-                    <p className={styles.itemMeta}>
-                      Brand: <span>{item.brand}</span>
-                    </p>
+                    {item.characteristics.length > 0 && (
+                      <dl className={styles.itemCharacteristics}>
+                        {item.characteristics.map(([label, value]) => (
+                          <div key={label}>
+                            <dt>{label}</dt>
+                            <dd>{value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
                   </div>
                   <div className={styles.itemPriceBlock}>
                     <span className={styles.priceLabel}>Price:</span>

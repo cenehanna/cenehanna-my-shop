@@ -27,33 +27,18 @@ function parsePrice(value) {
 
 async function getProducts(
   sort,
-  categoryPath,
-  flatCategories,
+  categoryIds,
   page,
   minPrice,
   maxPrice,
   colors,
+  productTypes,
 ) {
   const orderBy = getProductListOrderBy(sort);
-  let categoryIds;
-
-  if (categoryPath.length > 0) {
-    const selectedCategory = resolveCategoryByPath(
-      flatCategories,
-      categoryPath,
-    );
-    if (!selectedCategory)
-      return { products: [], totalCount: 0, totalPages: 0 };
-
-    categoryIds = collectDescendantCategoryIds(
-      flatCategories,
-      selectedCategory.id,
-    );
-  }
 
   const where = {
     parentId: null,
-    ...(categoryIds ? { categoryId: { in: categoryIds } } : {}),
+    ...(categoryIds !== undefined ? { categoryId: { in: categoryIds } } : {}),
     ...(minPrice !== undefined || maxPrice !== undefined
       ? {
           price: {
@@ -62,8 +47,9 @@ async function getProducts(
           },
         }
       : {}),
-    ...(colors.length > 0
-      ? { colourGroupName: { in: colors } }
+    ...(colors.length > 0 ? { colourGroupName: { in: colors } } : {}),
+    ...(productTypes.length > 0
+      ? { productTypeName: { in: productTypes } }
       : {}),
   };
   const [products, totalCount] = await Promise.all([
@@ -97,43 +83,109 @@ export default async function CatalogPage({ params, searchParams }) {
     : resolvedSearchParams?.color
       ? [resolvedSearchParams.color]
       : [];
+  const productTypes = Array.isArray(resolvedSearchParams?.productType)
+    ? resolvedSearchParams.productType
+    : resolvedSearchParams?.productType
+      ? [resolvedSearchParams.productType]
+      : [];
   const currentPage = Math.max(
     1,
     Number.parseInt(resolvedSearchParams?.page || "1", 10) || 1,
   );
 
-  const [flatCategories, colorOptions] = await Promise.all([
-    getAllCategoriesFlat(),
-    prisma.product.findMany({
-      where: { parentId: null },
-      distinct: ["colourGroupName"],
-      select: { colourGroupName: true },
-      orderBy: { colourGroupName: "asc" },
-    }),
-  ]);
-  const availableColors = colorOptions
-    .map(({ colourGroupName }) => ({
-      value: colourGroupName,
-      label: colourGroupName.trim(),
-    }))
-    .filter(({ label }) => label);
-  const filterCategories = buildCatalogFilterCategories(flatCategories);
+  const flatCategories = await getAllCategoriesFlat();
+  const selectedCategory = resolveCategoryByPath(flatCategories, categoryPath);
+  const categoryIds =
+    categoryPath.length === 0
+      ? undefined
+      : selectedCategory
+        ? collectDescendantCategoryIds(flatCategories, selectedCategory.id)
+        : [];
+  const baseWhere = {
+    parentId: null,
+    ...(categoryIds !== undefined ? { categoryId: { in: categoryIds } } : {}),
+    ...(minPrice !== undefined || maxPrice !== undefined
+      ? {
+          price: {
+            ...(minPrice !== undefined ? { gte: minPrice } : {}),
+            ...(maxPrice !== undefined ? { lte: maxPrice } : {}),
+          },
+        }
+      : {}),
+  };
+  const [productTypeCounts, colorCounts] =
+    categoryIds?.length === 0
+      ? [[], []]
+      : await Promise.all([
+          prisma.product.groupBy({
+            by: ["productTypeName"],
+            where: {
+              ...baseWhere,
+              ...(colors.length > 0 ? { colourGroupName: { in: colors } } : {}),
+            },
+            _count: { _all: true },
+            orderBy: { productTypeName: "asc" },
+          }),
+          prisma.product.groupBy({
+            by: ["colourGroupName"],
+            where: {
+              ...baseWhere,
+              ...(productTypes.length > 0
+                ? { productTypeName: { in: productTypes } }
+                : {}),
+            },
+            _count: { _all: true },
+            orderBy: { colourGroupName: "asc" },
+          }),
+        ]);
   const { products, totalCount, totalPages } = await getProducts(
     sort,
-    categoryPath,
-    flatCategories,
+    categoryIds,
     currentPage,
     minPrice,
     maxPrice,
     colors,
+    productTypes,
   );
 
-  const selectedCategory = resolveCategoryByPath(flatCategories, categoryPath);
+  const filterCategories = buildCatalogFilterCategories(flatCategories);
   const category = selectedCategory
     ? buildCategoryWithParents(flatCategories, selectedCategory.id)
     : null;
   const categoryName = selectedCategory?.name ?? null;
   const breadcrumbs = getBreadcrumbItems({ category });
+  const availableProductTypes = productTypeCounts.map(
+    ({ productTypeName, _count }) => ({
+      value: productTypeName,
+      label: productTypeName,
+      count: _count._all,
+    }),
+  );
+  for (const selectedType of productTypes) {
+    if (!availableProductTypes.some(({ value }) => value === selectedType)) {
+      availableProductTypes.push({
+        value: selectedType,
+        label: selectedType,
+        count: 0,
+      });
+    }
+  }
+  const availableColors = colorCounts
+    .filter(({ colourGroupName }) => colourGroupName.trim())
+    .map(({ colourGroupName, _count }) => ({
+      value: colourGroupName,
+      label: colourGroupName.trim(),
+      count: _count._all,
+    }));
+  for (const selectedColor of colors) {
+    if (!availableColors.some(({ value }) => value === selectedColor)) {
+      availableColors.push({
+        value: selectedColor,
+        label: selectedColor.trim(),
+        count: 0,
+      });
+    }
+  }
 
   return (
     <div>
@@ -141,7 +193,10 @@ export default async function CatalogPage({ params, searchParams }) {
       <Breadcrumbs items={breadcrumbs} />
       <div className={styles.pageContainer}>
         <div className={styles.catalogPage}>
-          <FilterPanel colors={availableColors} />
+          <FilterPanel
+            colors={availableColors}
+            productTypes={availableProductTypes}
+          />
           <ProductGrid
             products={products}
             categories={filterCategories}
@@ -155,6 +210,8 @@ export default async function CatalogPage({ params, searchParams }) {
             maxPrice={maxPrice}
             colors={colors}
             colorOptions={availableColors}
+            productTypes={productTypes}
+            productTypeOptions={availableProductTypes}
           />
         </div>
       </div>

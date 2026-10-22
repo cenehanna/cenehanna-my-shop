@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { ChevronDown, Funnel, X } from 'lucide-react';
-import styles from './MobileFilterMenu.module.css';
-import PriceFilter from '../PriceFilter/PriceFilter';
+import { useState } from 'react';
 import ColorFilter from '../ColorFilter/ColorFilter';
+import PriceFilter from '../PriceFilter/PriceFilter';
+import ProductTypeFilter from '../ProductTypeFilter/ProductTypeFilter';
+import styles from './MobileFilterMenu.module.css';
 
 function CategoryFilter({ categories }) {
 	const [expandedCategory, setExpandedCategory] = useState(null);
@@ -57,7 +58,11 @@ function CategoryFilter({ categories }) {
 	);
 }
 
-export default function MobileFilterMenu({ categories = [], colors = [] }) {
+export default function MobileFilterMenu({
+	categories = [],
+	colors = [],
+	productTypes = [],
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const closeMenu = () => setIsOpen(false);
@@ -87,6 +92,13 @@ export default function MobileFilterMenu({ categories = [], colors = [] }) {
 
 					<div className={styles.content}>
 						{categories.length > 0 && <CategoryFilter categories={categories} />}
+						<ProductTypeFilter
+							productTypes={productTypes}
+							groupClassName={styles.filterGroup}
+							optionsClassName={styles.options}
+							optionClassName={styles.option}
+							idPrefix="mobile-product-type"
+						/>
 						<ColorFilter
 							colors={colors}
 							groupClassName={styles.filterGroup}

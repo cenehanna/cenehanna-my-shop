@@ -70,6 +70,27 @@
   margin: 0;
 }
 
+.itemCharacteristics {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.itemCharacteristics > div {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.7fr) 1fr;
+  gap: 12px;
+}
+
+.itemCharacteristics dt {
+  color: var(--light-font-color);
+}
+
+.itemCharacteristics dd {
+  margin: 0;
+}
+
 .itemMeta {
   font-size: 14px;
   color: var(--light-font-color);

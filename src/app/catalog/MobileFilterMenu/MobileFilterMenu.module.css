@@ -102,7 +102,7 @@ font-size: clamp(0.75rem, 0.231vw + 0.69rem, 0.875rem);
 }
 
 .filterGroup h3 { margin: 0 0 14px; color: var(--font-color); font-size: 1rem; }
-.options { display: flex; flex-direction: column; gap: 14px; }
+.options { display: flex; flex-direction: column; gap: 14px; max-height: 240px; overflow-y: auto; }
 .option { display: flex; align-items: center; gap: 10px; color: var(--font-color); cursor: pointer; }
 .option input { position: absolute; opacity: 0; pointer-events: none; }
 .checkbox {

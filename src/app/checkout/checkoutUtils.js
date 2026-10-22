@@ -26,17 +26,34 @@ export const INITIAL_UKR_DATA = {
   apartment: "",
 };
 
+function getCategoryPath(category) {
+  const names = [];
+
+  for (let current = category; current; current = current.parent) {
+    if (typeof current.name === "string" && current.name.trim()) {
+      names.unshift(current.name);
+    }
+  }
+
+  return names.join(" / ");
+}
+
 // --- Нормалізація товару з localStorage ---
-// У Cart.jsx товар має: { id, title, images: [url], price }
-// Checkout очікує: { id, name, image, price, size, brand }
-export const normalizeCartItem = (item) => ({
-  id: item.id,
-  name: item.title || item.name || "Item",
-  image: getFirstImage(item.images?.length ? item.images : item.image),
-  price: Number(item.price || 0),
-  size: item.size || "—",
-  brand: item.brand || "—",
-});
+export const normalizeCartItem = (item) => {
+  const characteristics = [
+    ["Category", getCategoryPath(item.category)],
+    ["Color", item.colourGroupName],
+    ["Pattern", item.graphicalAppearanceName],
+  ].filter(([, value]) => typeof value === "string" && value.trim());
+
+  return {
+    id: item.id,
+    name: item.title || item.name || "Item",
+    image: getFirstImage(item.images?.length ? item.images : item.image),
+    price: Number(item.price || 0),
+    characteristics,
+  };
+};
 
 // --- Хук: завантаження товарів з localStorage ---
 export const useCartItems = () => {

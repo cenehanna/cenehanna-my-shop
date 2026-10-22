@@ -9,6 +9,7 @@ function buildCatalogHref(
   minPrice,
   maxPrice,
   colors = [],
+  productTypes = [],
 ) {
   const params = new URLSearchParams();
 
@@ -30,6 +31,10 @@ function buildCatalogHref(
 
   for (const color of colors) {
     params.append("color", color);
+  }
+
+  for (const productType of productTypes) {
+    params.append("productType", productType);
   }
 
   const basePath =
@@ -84,6 +89,7 @@ export default function Pagination({
   minPrice,
   maxPrice,
   colors = [],
+  productTypes = [],
 }) {
   if (totalPages <= 1) return null;
 
@@ -112,6 +118,7 @@ export default function Pagination({
             minPrice,
             maxPrice,
             colors,
+            productTypes,
           )}
           className={`${styles.pageLink} ${styles.navButton}`}
           aria-label="Go to previous page"
@@ -148,6 +155,7 @@ export default function Pagination({
               minPrice,
               maxPrice,
               colors,
+              productTypes,
             )}
             className={`${styles.pageLink} ${isActive ? styles.active : ""}`}
             aria-current={isActive ? "page" : undefined}
@@ -175,6 +183,7 @@ export default function Pagination({
             minPrice,
             maxPrice,
             colors,
+            productTypes,
           )}
           className={`${styles.pageLink} ${styles.navButton}`}
           aria-label="Go to next page"

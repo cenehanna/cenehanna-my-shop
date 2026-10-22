@@ -43,7 +43,7 @@ export default function ColorFilter({
     <section className={groupClassName}>
       <h3>Color</h3>
       <div className={optionsClassName}>
-        {colors.map(({ value, label }, index) => {
+        {colors.map(({ value, label, count }, index) => {
           const id = `${idPrefix}-${index}`;
           return (
             <label key={value} className={optionClassName} htmlFor={id}>
@@ -58,7 +58,9 @@ export default function ColorFilter({
                   <Check size={13} strokeWidth={3} />
                 </span>
               )}
-              <span>{label}</span>
+              <span>
+                {label} ({count})
+              </span>
             </label>
           );
         })}

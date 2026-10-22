@@ -4,6 +4,7 @@ import ProductCard from "@/components/ProductCard/ProductCard";
 import MobileFilterMenu from "../MobileFilterMenu/MobileFilterMenu";
 import Pagination from "../Pagination/Pagination";
 import SortSelect from "../SortSelect/SortSelect";
+import ActiveFilterTags from "./ActiveFilterTags";
 import styles from "./ProductGrid.module.css";
 
 export default function ProductGrid({
@@ -19,17 +20,32 @@ export default function ProductGrid({
   maxPrice,
   colors,
   colorOptions,
+  productTypes,
+  productTypeOptions,
 }) {
   return (
     <main className={styles.productsContainer}>
       <div className={styles.gridHeading}>
-        <h1>{categoryName || "All Products"}</h1>
-        <span className={styles.productsCount}>{totalCount} products</span>
+        <h1>
+          {categoryName || "All Products"}{" "}
+          <span className={styles.headingCount}>({totalCount})</span>
+        </h1>
       </div>
+
+      <ActiveFilterTags
+        colors={colorOptions}
+        productTypes={productTypeOptions}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
+      />
 
       <div className={styles.toolbar}>
         <div className={styles.filterButtonContainer}>
-          <MobileFilterMenu categories={categories} colors={colorOptions} />
+          <MobileFilterMenu
+            categories={categories}
+            colors={colorOptions}
+            productTypes={productTypeOptions}
+          />
         </div>
 
         <SortSelect />
@@ -53,6 +69,7 @@ export default function ProductGrid({
         minPrice={minPrice}
         maxPrice={maxPrice}
         colors={colors}
+        productTypes={productTypes}
       />
     </main>
   );
