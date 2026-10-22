@@ -1,10 +1,13 @@
+import Accordion from "@/components/Accordion/Accordion";
 import Categories from "@/components/Categories/Categories";
 import Hero from "@/components/Hero/Hero";
 import NewArrivals from "@/components/NewArrivals/NewArrivals";
 import ProductCarousel from "@/components/ProductCarousel/ProductCarousel";
-import Accordion from "@/components/Accordion/Accordion";
-import { getHomeNewArrivals } from "@/lib/productQueries";
 import { getFeaturedCategoriesWithImages } from "@/lib/categoryQueries";
+import {
+  getHeroProductColumns,
+  getHomeNewArrivals,
+} from "@/lib/productQueries";
 
 const FAQ_ITEMS = [
   {
@@ -52,18 +55,19 @@ const FAQ_ITEMS = [
 ];
 
 export default async function Home() {
-  const [products, categories] = await Promise.all([
+  const [products, categories, heroProductColumns] = await Promise.all([
     getHomeNewArrivals(),
     getFeaturedCategoriesWithImages(5),
+    getHeroProductColumns(),
   ]);
 
   return (
     <div className="pageSections">
-      <Hero />
+      <Hero productColumns={heroProductColumns} />
       <Categories categories={categories} />
       <NewArrivals products={products} />
 
-      <ProductCarousel title="Recently viewed items" />
+      <ProductCarousel title="Recently viewed items" variant="recentlyViewed" />
 
       <section className="content" id="faq">
         <h2 className="main-headings">Frequently Asked Questions</h2>

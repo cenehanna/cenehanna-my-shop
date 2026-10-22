@@ -18,14 +18,26 @@ export function resolveCategoryByPath(categories, categoryPath) {
   let parentId = null;
   let selectedCategory = null;
 
-  for (const slug of categoryPath) {
-    selectedCategory =
-      categoriesByParentId
-        .get(parentId)
-        ?.find((category) => category.slug === slug) ?? null;
+  for (let pathIndex = 0; pathIndex < categoryPath.length; ) {
+    const siblings = categoriesByParentId.get(parentId) ?? [];
+    let matchedSegments = 0;
+
+    for (
+      let endIndex = categoryPath.length;
+      endIndex > pathIndex;
+      endIndex -= 1
+    ) {
+      const slug = categoryPath.slice(pathIndex, endIndex).join("/");
+      selectedCategory = siblings.find((category) => category.slug === slug);
+      if (selectedCategory) {
+        matchedSegments = endIndex - pathIndex;
+        break;
+      }
+    }
 
     if (!selectedCategory) return null;
     parentId = selectedCategory.id;
+    pathIndex += matchedSegments;
   }
 
   return selectedCategory;

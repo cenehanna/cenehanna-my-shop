@@ -42,7 +42,7 @@ export const getHeaderCategories = unstable_cache(
       });
     } catch (error) {
       console.error("Помилка завантаження категорій для хедера:", error);
-      return [];
+      throw error;
     }
   },
   ["categories-header"],
@@ -127,7 +127,7 @@ export const getFeaturedCategoriesWithImages = unstable_cache(
       );
     } catch (error) {
       console.error("Error fetching featured categories:", error);
-      return [];
+      throw error;
     }
   },
   ["featured-categories-home"],

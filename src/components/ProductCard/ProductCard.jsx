@@ -12,7 +12,12 @@ import styles from "./ProductCard.module.css";
 const VIEWED_PRODUCTS_KEY = "viewed-products";
 const MAX_VIEWED_PRODUCTS = 40;
 
-export default function ProductCard({ product, isPriority = false }) {
+export default function ProductCard({
+  product,
+  isPriority = false,
+  variant = "default",
+}) {
+  const isCompact = variant === "compact";
   const [isHovered, setIsHovered] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(product);
 
@@ -49,7 +54,7 @@ export default function ProductCard({ product, isPriority = false }) {
 
   return (
     <article
-      className={styles.productCard}
+      className={`${styles.productCard} ${isCompact ? styles.compactCard : ""}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -90,9 +95,9 @@ export default function ProductCard({ product, isPriority = false }) {
 
       <div className={styles.productInfo}>
         <h5>{selectedVariant.title}</h5>
-        <p>{product.description}</p>
+        {!isCompact && <p>{product.description}</p>}
         <h4>{selectedVariant.price} UAH</h4>
-        {uniqueVariants.length > 1 && (
+        {!isCompact && uniqueVariants.length > 1 && (
           <div className={styles.variantSwatches}>
             {uniqueVariants.map((variant) => (
               <button

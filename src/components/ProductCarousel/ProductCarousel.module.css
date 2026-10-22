@@ -4,11 +4,21 @@
   justify-content: space-between;
   gap: 16px;
   margin-bottom: calc(clamp(0.125rem, 0.924vw + -0.114rem, 0.625rem) + 8px);
+    border-bottom: var(--border);
+    padding-bottom: 10px;
+
 }
 
 .headerRow h2 {
   margin-bottom: 0;
 }
+
+.recentlyViewed {
+  border-radius: 18px;
+  background-color: #f4ecec;
+}
+
+
 
 .seeAllButton {
   display: inline-flex;
@@ -95,6 +105,7 @@
   flex: 0 0 calc((100% - 3 * 20px) / 4);
   min-width: 0;
   user-select: none;
+  box-shadow: var(--big-shadow);
 }
 
 .progressBar {

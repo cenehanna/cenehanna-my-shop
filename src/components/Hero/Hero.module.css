@@ -33,53 +33,97 @@
 /* ---------- Product cards ---------- */
 
 .cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(8px, 1.2vw, 14px);
   margin: 0;
   padding: 0;
   list-style: none;
   flex: 0 1 auto;
   min-width: 0;
+  width: min(58%, 540px);
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto; /* cards never stretch or shrink */
-  width: clamp(110px, 14vw, 170px);
-  background: #fff;
+  min-width: 0;
+  height: 210px;
+  background: rgba(255, 255, 255, 0.96);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
+.productWindow {
+  min-height: 0;
+  height: 210px;
+  overflow: hidden;
+}
+
+.productTrack {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateY(0);
+}
+
+.productTrack.sliding {
+  transform: translateY(-210px);
+  transition: transform 500ms ease;
+}
+
+.productItem {
+  height: 210px;
+}
+
+.productLink {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
 .cardImage {
+  position: relative;
+  display: block;
+  flex: 0 0 150px;
   width: 100%;
-  aspect-ratio: 4 / 4.2;
-  background: #e6e0da;
+  height: 150px;
+  overflow: hidden;
+  background: #f4f1ef;
+}
+
+.cardImage img {
+  object-fit: cover;
 }
 
 .cardInfo {
   display: flex;
+  min-width: 0;
   flex-direction: column;
-  gap: 2px;
-  padding: 8px 10px 10px;
+  gap: 5px;
+  padding: 8px 10px;
 }
 
 .cardName {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 0;
   color: #3b2a1e;
-  font-size: clamp(0.75rem, 0.9vw, 0.9rem);
+  font-size: clamp(0.65rem, 0.72vw, 0.78rem);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .cardPrice {
   margin: 0;
   color: #8a5a36;
-  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-size: 0.85rem;
   font-weight: 700;
 }
 
@@ -145,16 +189,7 @@
   .cards {
     align-self: flex-start;
     max-width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .cards::-webkit-scrollbar {
-    display: none;
-  }
-
-  .card {
-    width: clamp(130px, 22vw, 170px);
+    width: 100%;
   }
 
   .heroContent {
@@ -174,13 +209,13 @@
 
   .cards {
     width: 100%;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
+    grid-template-columns: repeat(3, minmax(130px, 1fr));
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
-  .card {
-    width: 130px;
-    scroll-snap-align: start;
+  .cards::-webkit-scrollbar {
+    display: none;
   }
 
   .heroContent {

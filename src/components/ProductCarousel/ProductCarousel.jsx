@@ -14,7 +14,12 @@ import {
 } from "@/lib/viewedProductsStorage";
 import styles from "./ProductCarousel.module.css";
 
-export default function ProductCarousel({ title, initialProducts = [] }) {
+export default function ProductCarousel({
+  title,
+  initialProducts = [],
+  variant = "default",
+}) {
+  const isRecentlyViewed = variant === "recentlyViewed";
   const [products, setProducts] = useState(initialProducts);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -118,7 +123,11 @@ export default function ProductCarousel({ title, initialProducts = [] }) {
   if (products.length === 0) return null;
 
   return (
-    <section className={`content ${styles.productCarousel}`}>
+    <section
+      className={`content ${styles.productCarousel} ${
+        isRecentlyViewed ? styles.recentlyViewed : ""
+      }`}
+    >
       <div className={styles.headerRow}>
         <h2 className="main-headings">{title}</h2>
         <button type="button" className={styles.seeAllButton}>
@@ -154,7 +163,10 @@ export default function ProductCarousel({ title, initialProducts = [] }) {
           <div className={styles.carousel}>
             {products.map((product) => (
               <div key={product.id} className={styles.carouselSlide}>
-                <ProductCard product={product} />
+                <ProductCard
+                  product={product}
+                  variant={isRecentlyViewed ? "compact" : "default"}
+                />
               </div>
             ))}
           </div>

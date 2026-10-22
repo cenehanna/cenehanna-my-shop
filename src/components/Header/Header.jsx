@@ -35,6 +35,7 @@ export default function Header({ CATEGORIES }) {
 
   // Стан для контролю активних випадаючих пунктів каталогу
   const [activeCatId, setActiveCatId] = useState(null);
+  const [hoveredCatId, setHoveredCatId] = useState(null);
 
   const timeoutRef = useRef(null);
   const activeCategory = CATEGORIES.find(
@@ -94,11 +95,13 @@ export default function Header({ CATEGORIES }) {
   const closeCatalog = useCallback(() => {
     setIsCatalogOpen(false);
     setActiveCatId(null);
+    setHoveredCatId(null);
   }, []);
 
   // --- Каталог: hover ---
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setHoveredCatId(null);
     setActiveCatId((current) =>
       CATEGORIES.some((category) => category.id === current)
         ? current
@@ -182,13 +185,33 @@ export default function Header({ CATEGORIES }) {
                 }}
               >
                 <ul className={styles.categoryColumn} aria-label="Categories">
+                  <li
+                    className={
+                      pathname === "/catalog" && hoveredCatId === null
+                        ? styles.activeLi
+                        : ""
+                    }
+                    onMouseEnter={() => setHoveredCatId(null)}
+                  >
+                    <Link href="/catalog" onClick={closeCatalog}>
+                      <span>All Products</span>
+                    </Link>
+                  </li>
                   {CATEGORIES.map((category) => (
                     <li
                       key={category.id}
                       className={
-                        activeCatId === category.id ? styles.activeLi : ""
+                        hoveredCatId === category.id ||
+                        (hoveredCatId === null &&
+                          (pathname === `/catalog/${category.slug}` ||
+                            pathname.startsWith(`/catalog/${category.slug}/`)))
+                          ? styles.activeLi
+                          : ""
                       }
-                      onMouseEnter={() => setActiveCatId(category.id)}
+                      onMouseEnter={() => {
+                        setActiveCatId(category.id);
+                        setHoveredCatId(category.id);
+                      }}
                     >
                       <Link
                         href={`/catalog/${category.slug}`}
