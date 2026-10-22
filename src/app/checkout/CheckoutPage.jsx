@@ -1,9 +1,9 @@
 "use client";
 
 import { ShoppingBag } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/ui";
+import Image from "@/components/ui/ProductImage";
 import CheckoutForm, { FormField } from "./CheckoutForm";
 import styles from "./CheckoutPage.module.css";
 import { useCartItems, useCheckoutForm } from "./checkoutUtils";

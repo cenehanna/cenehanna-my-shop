@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { getFirstImage } from "@/lib/images";
+import Image from "@/components/ui/ProductImage";
+import { getFirstImage, getImage } from "@/lib/images";
 
 import FavoriteButton from "./FavoriteButton/FavoriteButton";
 import ProductBadge from "./ProductBadge/ProductBadge";
@@ -64,7 +64,11 @@ export default function ProductCard({ product, isPriority = false }) {
       >
         <div className={styles.productImg}>
           <Image
-            src={selectedVariant.images?.[0] || getFirstImage(product.images)}
+            src={getFirstImage(
+              selectedVariant.images?.length
+                ? selectedVariant.images
+                : product.images,
+            )}
             alt={selectedVariant.title}
             fill
             sizes={imageSizes}
@@ -74,7 +78,7 @@ export default function ProductCard({ product, isPriority = false }) {
 
           {hasSecondImage && (
             <Image
-              src={selectedVariant.images[1]}
+              src={getImage(selectedVariant.images, 1)}
               alt={`${selectedVariant.title} - view 2`}
               fill
               sizes={imageSizes}

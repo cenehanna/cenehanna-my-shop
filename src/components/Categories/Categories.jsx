@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
 import { MoveRight } from "lucide-react";
+import Link from "next/link";
+import Image from "@/components/ui/ProductImage";
 import { getFirstImage } from "@/lib/images";
 
 import styles from "./Categories.module.css";

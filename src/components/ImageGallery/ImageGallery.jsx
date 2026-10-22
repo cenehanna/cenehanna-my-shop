@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
+import Image from "@/components/ui/ProductImage";
 import { getFirstImage } from "@/lib/images";
 import styles from "./ImageGallery.module.css";
 
@@ -128,9 +128,7 @@ export default function ImageGallery({
                 src={image}
                 fill
                 sizes="(max-width: 768px) 20vw, 10vw"
-                alt={
-                  hasRealImage ? `${variant.title} - thumbnail` : "No image"
-                }
+                alt={hasRealImage ? `${variant.title} - thumbnail` : "No image"}
                 className={styles.galleryImage}
                 onLoad={(e) =>
                   e.currentTarget.setAttribute("data-loaded", "true")

@@ -1,7 +1,6 @@
 "use client";
 
 import { MessageCircleQuestionMark } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Accordion from "@/components/Accordion/Accordion";
@@ -10,6 +9,7 @@ import ImageGallery from "@/components/ImageGallery/ImageGallery";
 import OtherProducts from "@/components/OtherProducts/OtherProducts";
 import ProductBadge from "@/components/ProductCard/ProductBadge/ProductBadge";
 import ProductCarousel from "@/components/ProductCarousel/ProductCarousel";
+import Image from "@/components/ui/ProductImage";
 import { getBreadcrumbItems } from "@/lib/breadcrumbs";
 import { getFirstImage } from "@/lib/images";
 import Buttons from "./Buttons/Buttons";
@@ -48,7 +48,10 @@ export default function ProductPage({ product, initialProducts }) {
                 <Accordion className={styles.accordion} title="Description">
                   <p>{product.description}</p>
                 </Accordion>
-                <Accordion className={styles.accordion} title="Composition & Care">
+                <Accordion
+                  className={styles.accordion}
+                  title="Composition & Care"
+                >
                   <p>{product.description}</p>
                 </Accordion>
                 <Accordion

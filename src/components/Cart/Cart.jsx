@@ -1,9 +1,9 @@
 "use client";
 
 import { ShoppingBag, Trash2, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Image from "@/components/ui/ProductImage";
 import { getFirstImage } from "@/lib/images";
 import styles from "./Cart.module.css";
 
