@@ -13,6 +13,18 @@ const INITIAL_USER_DATA = {
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80",
 };
 
+const sanitizeAvatarUrl = (value) => {
+  try {
+    const parsed = new URL(value);
+    if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+      return parsed.toString();
+    }
+  } catch {
+    // Ignore parse errors and fall back to a safe default.
+  }
+  return INITIAL_USER_DATA.avatar;
+};
+
 const MOCK_ORDERS = [
   {
     id: "ORD-84920",
@@ -46,7 +58,11 @@ export default function ProfilePage() {
 
   const handleSaveProfile = (e) => {
     e.preventDefault();
-    setUserData(formState);
+    setUserData((prev) => ({
+      ...prev,
+      ...formState,
+      avatar: sanitizeAvatarUrl(formState.avatar),
+    }));
     setIsEditing(false);
   };
 
