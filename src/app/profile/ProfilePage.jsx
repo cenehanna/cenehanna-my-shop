@@ -13,6 +13,14 @@ const INITIAL_USER_DATA = {
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80",
 };
 
+const ALLOWED_PROFILE_FIELDS = new Set([
+  "fullName",
+  "email",
+  "phone",
+  "address",
+  "avatar",
+]);
+
 const sanitizeAvatarUrl = (value) => {
   try {
     const parsed = new URL(value);
@@ -53,6 +61,9 @@ export default function ProfilePage() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (!ALLOWED_PROFILE_FIELDS.has(name)) {
+      return;
+    }
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
